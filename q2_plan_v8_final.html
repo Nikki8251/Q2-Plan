@@ -1,0 +1,457 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.r{padding:1.5rem 0;font-family:var(--font-sans)}
+.hdr-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.hdr-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.tb{padding:5px 12px;font-size:12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.tb.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.tb:hover:not(.on){background:var(--color-background-secondary)}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;margin-bottom:1.25rem}
+.oc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem 1rem;cursor:pointer;border:0.5px solid transparent;transition:all .15s}
+.oc:hover{border-color:var(--color-border-secondary)}
+.on-num{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.on-name{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.4}
+.ov-sum{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1.25rem}
+.kk{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem;text-align:center}
+.kv{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.kl{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.tl-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.tl-row{display:flex;gap:6px}
+.tl-m{flex:1;border-radius:var(--border-radius-md);padding:8px;border:0.5px solid var(--color-border-tertiary)}
+.ml{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.mi{font-size:10px;color:var(--color-text-secondary);margin-bottom:3px;line-height:1.4;padding-left:8px;position:relative}
+.mi::before{content:'·';position:absolute;left:0;color:var(--color-text-tertiary)}
+.det{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.5rem}
+.det-hdr{margin-bottom:1.25rem}
+.dt{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.ds{font-size:13px;color:var(--color-text-secondary);margin-top:3px}
+.sl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;margin-top:1.25rem}
+.bgb{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem 1rem;font-size:13px;color:var(--color-text-primary);line-height:1.7}
+.steps{display:flex;flex-direction:column;gap:8px}
+.step{display:flex;align-items:flex-start;gap:10px;padding:.75rem 1rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-primary);line-height:1.5}
+.sn{min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;margin-top:1px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px}
+.ki{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem;text-align:center}
+.kiv{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.kik{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.dep-row{display:flex;gap:8px;flex-wrap:wrap}
+.dep{font-size:11px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+.doc-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-info);text-decoration:none;padding:5px 10px;border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-md);margin-top:8px;cursor:pointer}
+.doc-link:hover{background:var(--color-background-info)}
+.doc-placeholder{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-tertiary);padding:5px 10px;border:0.5px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-top:8px}
+.okr-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.okr-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem}
+.okr-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.okr-o{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.5}
+.okr-kr{font-size:12px;color:var(--color-text-secondary);line-height:1.6;padding-left:12px;position:relative;margin-bottom:3px}
+.okr-kr::before{content:'→';position:absolute;left:0;color:var(--color-text-tertiary);font-size:10px;top:2px}
+.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:4px}
+.cat-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem;border-left:2px solid var(--color-border-secondary)}
+.cat-name{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.cat-desc{font-size:11px;color:var(--color-text-secondary);line-height:1.4}
+</style>
+
+<div class="r">
+<div class="hdr-title">Q2 2026 — Full Project Plan</div>
+<div class="hdr-sub">Zero Markets · 9 Projects · Owner: Nikki</div>
+
+<div class="tabs">
+  <button class="tb on" onclick="show('ov')">Overview</button>
+  <button class="tb" onclick="show('p1')">GEO</button>
+  <button class="tb" onclick="show('p2')">Portal v2</button>
+  <button class="tb" onclick="show('p3')">Access Mgmt</button>
+  <button class="tb" onclick="show('p4')">AI Ads Engine</button>
+  <button class="tb" onclick="show('p5')">Data Dashboard</button>
+  <button class="tb" onclick="show('p6')">AI Content System</button>
+  <button class="tb" onclick="show('p7')">Language</button>
+  <button class="tb" onclick="show('p8')">Instagram</button>
+  <button class="tb" onclick="show('p9')">NISE Emails</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="s-ov">
+  <div class="ov-grid">
+    <div class="oc" onclick="show('p1')"><div class="on-num">P01 · Q2</div><div class="on-name">Website GEO</div></div>
+    <div class="oc" onclick="show('p2')"><div class="on-num">P02 · Q2</div><div class="on-name">Marketing Portal v2</div></div>
+    <div class="oc" onclick="show('p3')"><div class="on-num">P03 · Q2</div><div class="on-name">Access Management</div></div>
+    <div class="oc" onclick="show('p4')"><div class="on-num">P04 · Q2→Q3</div><div class="on-name">AI Ads Engine</div></div>
+    <div class="oc" onclick="show('p5')"><div class="on-num">P05 · Q2</div><div class="on-name">Marketing Data Dashboard</div></div>
+    <div class="oc" onclick="show('p6')"><div class="on-num">P06 · Q2</div><div class="on-name">AI Content System</div></div>
+    <div class="oc" onclick="show('p7')"><div class="on-num">P07 · Q2→Q3</div><div class="on-name">Language Standardisation</div></div>
+    <div class="oc" onclick="show('p8')"><div class="on-num">P08 · Q2</div><div class="on-name">Instagram 10K</div></div>
+    <div class="oc" onclick="show('p9')"><div class="on-num">P09 · Q2</div><div class="on-name">NISE Invest Email Suite</div></div>
+  </div>
+  <div class="ov-sum">
+    <div class="kpi-row">
+      <div class="kk"><div class="kv">9</div><div class="kl">Total projects</div></div>
+      <div class="kk"><div class="kv">7</div><div class="kl">Q2 delivery</div></div>
+      <div class="kk"><div class="kv">2</div><div class="kl">Q2→Q3 cross-quarter</div></div>
+      <div class="kk"><div class="kv">40</div><div class="kl">NISE emails scoped</div></div>
+      <div class="kk"><div class="kv">7</div><div class="kl">Email categories</div></div>
+    </div>
+    <div class="tl-label">Q2 month-by-month</div>
+    <div class="tl-row">
+      <div class="tl-m"><div class="ml">April</div>
+        <div class="mi">GEO content audit</div>
+        <div class="mi">Portal user feedback collection</div>
+        <div class="mi">Access data initialisation</div>
+        <div class="mi">AI Ads PRD alignment with dev</div>
+        <div class="mi">KPI metric definition lock-in</div>
+        <div class="mi">AI content type inventory</div>
+        <div class="mi">Language audit kickoff</div>
+        <div class="mi">IG account positioning & templates</div>
+        <div class="mi">NISE email scope & brief</div>
+      </div>
+      <div class="tl-m"><div class="ml">May</div>
+        <div class="mi">GEO Schema + FAQ rewrite</div>
+        <div class="mi">Portal v2 features live</div>
+        <div class="mi">Access system testing & deployment</div>
+        <div class="mi">AI Ads P0 development</div>
+        <div class="mi">Dashboard v1 live</div>
+        <div class="mi">Prompt library build</div>
+        <div class="mi">Language Standard Guide published</div>
+        <div class="mi">IG Reels ongoing</div>
+        <div class="mi">NISE emails batch 1 & 2 copy</div>
+      </div>
+      <div class="tl-m"><div class="ml">June</div>
+        <div class="mi">GEO AI visibility monitoring</div>
+        <div class="mi">Portal training & SOP</div>
+        <div class="mi">Access full rollout</div>
+        <div class="mi">AI Ads Beta — 1 market</div>
+        <div class="mi">Dashboard review cycle live</div>
+        <div class="mi">AI content SOP finalised</div>
+        <div class="mi">High-freq language fixes</div>
+        <div class="mi">IG → 10K push</div>
+        <div class="mi">NISE emails platform setup & QA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P1: GEO -->
+<div id="s-p1" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">Website GEO Optimisation</div>
+    <div class="ds">Generative Engine Optimisation · AI search visibility for Zero Markets</div>
+  </div>
+  <div class="sl">Why we do this</div>
+  <div class="bgb">AI search engines (ChatGPT, Perplexity, Google SGE) are reshaping how users discover financial products. Traditional SEO rankings have almost no influence on AI-generated answers. Zero Markets currently has near-zero citation presence in AI responses, while competitors are beginning to invest. This is an open window — AI recommendation positions are not yet consolidated, and brands that establish authority now will hold a structural advantage.</div>
+  <div class="sl">Reference documents</div>
+  <span class="doc-placeholder">→ GEO Strategy Doc — paste SharePoint link</span>
+  <div class="sl">OKR</div>
+  <div class="okr-row">
+    <div class="okr-box">
+      <div class="okr-label">Objective</div>
+      <div class="okr-o">Establish Zero Markets as a citable, AI-visible authority in key trading and forex queries</div>
+      <div class="okr-kr">KR1 — Complete full-site GEO audit; identify and document 10+ AI visibility gaps</div>
+      <div class="okr-kr">KR2 — Deploy Schema.org markup (FAQPage, Organization, BreadcrumbList) across 5+ core pages</div>
+      <div class="okr-kr">KR3 — Achieve brand citation in ChatGPT / Perplexity for 3 target query types</div>
+      <div class="okr-kr">KR4 — Establish AI visibility monitoring baseline; tracked monthly</div>
+    </div>
+    <div class="okr-box">
+      <div class="okr-label">What makes GEO different from SEO</div>
+      <div class="okr-o" style="font-size:12px;font-weight:400;color:var(--color-text-secondary);line-height:1.7">GEO targets AI citation, not keyword rankings. The logic: structured content + authority signals + direct question answering. A page that ranks #1 on Google may still never appear in an AI-generated response if it lacks the right structure.</div>
+    </div>
+  </div>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#E6F1FB;color:#0C447C;">1</div><div><strong>Content audit (April)</strong> — Review core site pages (homepage, product, regulatory, FAQ); identify content structures most likely to be cited by AI</div></div>
+    <div class="step"><div class="sn" style="background:#E6F1FB;color:#0C447C;">2</div><div><strong>Schema deployment (April–May)</strong> — Add FAQPage, Organization, and BreadcrumbList structured data markup across priority pages</div></div>
+    <div class="step"><div class="sn" style="background:#E6F1FB;color:#0C447C;">3</div><div><strong>FAQ / help content rewrite (May)</strong> — Restructure in direct Q&A format targeting real user queries in AI tools (e.g. "What is Zero Markets regulated by?")</div></div>
+    <div class="step"><div class="sn" style="background:#E6F1FB;color:#0C447C;">4</div><div><strong>Authority signal enhancement (May)</strong> — Add regulatory credentials page, authoritative external references, media endorsement module</div></div>
+    <div class="step"><div class="sn" style="background:#E6F1FB;color:#0C447C;">5</div><div><strong>AI visibility monitoring (June)</strong> — Regular testing in ChatGPT / Perplexity for brand citation; establish monthly tracking baseline</div></div>
+  </div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">5+</div><div class="kik">GEO-ready pages</div></div>
+    <div class="ki"><div class="kiv">Schema</div><div class="kik">Deployed</div></div>
+    <div class="ki"><div class="kiv">3 queries</div><div class="kik">Brand cited in AI</div></div>
+    <div class="ki"><div class="kiv">Baseline</div><div class="kik">Monitoring live</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P2: Portal v2 -->
+<div id="s-p2" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">Marketing Portal v2</div>
+    <div class="ds">Continuous iteration on internal marketing operations tooling</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">Q1 delivered Portal v1 with four core modules: Campaign Management, Digital Asset Management, Influencer Management, and Payment Calendar & Tracking Links. Q2 goal: iterate based on real user feedback, resolve cross-team collaboration gaps, and add data visualisation and alerting capabilities to make the portal the team's daily operational hub.</div>
+  <div class="sl">Q1 delivered modules</div>
+  <div class="tag-row">
+    <span class="tag">Campaign Management</span>
+    <span class="tag">Digital Asset Management</span>
+    <span class="tag">Influencer Management</span>
+    <span class="tag">Payment Calendar & Tracking Links</span>
+  </div>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#EAF3DE;color:#27500A;">1</div><div><strong>User feedback collection (April)</strong> — Mini-review with KR / LA / BR / NZ regional teams; document pain points and feature gaps before building anything</div></div>
+    <div class="step"><div class="sn" style="background:#EAF3DE;color:#27500A;">2</div><div><strong>Budget module upgrade</strong> — Real-time spend vs budget comparison; automated alert when utilisation exceeds 80%</div></div>
+    <div class="step"><div class="sn" style="background:#EAF3DE;color:#27500A;">3</div><div><strong>Asset module optimisation</strong> — Filter by market / channel / language; version control (new uploads retain previous version history)</div></div>
+    <div class="step"><div class="sn" style="background:#EAF3DE;color:#27500A;">4</div><div><strong>Campaign calendar enhancement</strong> — Cross-region summary view; colour-coded status labels (Draft / Live / Ended)</div></div>
+    <div class="step"><div class="sn" style="background:#EAF3DE;color:#27500A;">5</div><div><strong>Documentation & training (June)</strong> — Updated SOP, Loom walkthrough recordings for each region</div></div>
+  </div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">v2</div><div class="kik">Portal live</div></div>
+    <div class="ki"><div class="kiv">5+</div><div class="kik">New features</div></div>
+    <div class="ki"><div class="kiv">4</div><div class="kik">Regions onboarded</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P3: Access Mgmt -->
+<div id="s-p3" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">Access Management System</div>
+    <div class="ds">Centralised SaaS permission management · Q1 design complete → Q2 launch</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">SaaS tool permissions are currently unmanaged: no central access point, offboarded employees retain active accounts, and IT asset visibility across 70+ staff is near zero — creating both security risk and cost waste. System design was completed in Q1. Q2 goal: drive the system to full production, complete permission data migration, and establish daily access management workflows.</div>
+  <div class="sl">Live system</div>
+  <a class="doc-link" href="https://nikki8251.github.io/Access-management/" target="_blank">→ Access Management System (Live)</a>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#FAEEDA;color:#633806;">1</div><div><strong>Stakeholder alignment (April)</strong> — Confirm rollout scope with IT, HR, and department managers; requires Paddy endorsement to drive cooperation</div></div>
+    <div class="step"><div class="sn" style="background:#FAEEDA;color:#633806;">2</div><div><strong>Data initialisation</strong> — Audit all 70+ employee SaaS tool permissions; input into system to establish access baseline</div></div>
+    <div class="step"><div class="sn" style="background:#FAEEDA;color:#633806;">3</div><div><strong>System testing & deployment (May)</strong> — End-to-end testing of request flow, approval flow, and offboarding flow; resolve any bugs</div></div>
+    <div class="step"><div class="sn" style="background:#FAEEDA;color:#633806;">4</div><div><strong>Onboarding / offboarding SOP</strong> — Standardised permission workflows integrated with HR processes</div></div>
+    <div class="step"><div class="sn" style="background:#FAEEDA;color:#633806;">5</div><div><strong>Full rollout & training (June)</strong> — Train department managers; assign module owners to ensure ongoing sustainability</div></div>
+  </div>
+  <div class="sl">Dependencies</div>
+  <div class="dep-row"><span class="dep">Paddy endorsement</span><span class="dep">IT cooperation</span><span class="dep">HR process integration</span><span class="dep">Department data input</span></div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">Live</div><div class="kik">System launched</div></div>
+    <div class="ki"><div class="kiv">70+</div><div class="kik">Users mapped</div></div>
+    <div class="ki"><div class="kiv">SOP</div><div class="kik">On/offboarding</div></div>
+    <div class="ki"><div class="kiv">0</div><div class="kik">Ghost accounts</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P4: AI Ads Engine -->
+<div id="s-p4" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">AI Ads Engine</div>
+    <div class="ds">Embedded in Marketing Portal · AI-driven ad budget and creative automation</div>
+  </div>
+  <div class="sl">Background (from PRD v1.0)</div>
+  <div class="bgb">The ads team runs simultaneous campaigns across Google Ads, Meta, TikTok, and YouTube. Daily budget adjustments rely entirely on manual judgement; the team cannot respond to real-time CPA anomalies. Creative fatigue goes undetected. No unified management interface. Core goal: 80% of routine daily budget micro-adjustments executed automatically by AI; anomaly response reduced from 4 hours to 30 minutes. Embedded in existing Marketing Portal (Java Spring Boot + React + PostgreSQL + ClickHouse).</div>
+  <div class="sl">Nikki's role</div>
+  <div class="bgb" style="font-size:12px">Requirements owner · PRD maintenance · Coordination with internal dev team · Acceptance testing · Launch coordination. Not writing code — responsible for ensuring business logic is accurately translated into technical requirements.</div>
+  <div class="sl">PRD document</div>
+  <a class="doc-link" href="https://ddmarketinghub-my.sharepoint.com/:w:/p/yuwang/IQDFR3XmfysLTpKETuYPyjhDAbzm4xJW1WmSD4_ycfiSraQ?e=hrp2bR&wdExp=TEAMS-TREATMENT&web=1" target="_blank">→ AI Budget Engine Requirements v1.0 (SharePoint)</a>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#EEEDFE;color:#3C3489;">1</div><div><strong>Requirements walkthrough (April)</strong> — PRD review with dev team; confirm technical feasibility; prioritise P0: auto budget adjustment + anomaly alerting</div></div>
+    <div class="step"><div class="sn" style="background:#EEEDFE;color:#3C3489;">2</div><div><strong>Data pipeline setup (April–May)</strong> — Google Ads / Meta API integration; real-time spend data flowing into ClickHouse</div></div>
+    <div class="step"><div class="sn" style="background:#EEEDFE;color:#3C3489;">3</div><div><strong>P0 feature development (May)</strong> — AI budget auto-adjustment module + alerting rule engine; Nikki handles business acceptance testing</div></div>
+    <div class="step"><div class="sn" style="background:#EEEDFE;color:#3C3489;">4</div><div><strong>Beta internal test (June)</strong> — Soft launch in 1 market (KR or BR); collect ops team feedback</div></div>
+    <div class="step"><div class="sn" style="background:#EEEDFE;color:#3C3489;">5</div><div><strong>P1 iteration (Q3)</strong> — Creative fatigue detection, one-click replacement suggestions, full audit log</div></div>
+  </div>
+  <div class="sl">Dependencies</div>
+  <div class="dep-row"><span class="dep">Dev team capacity</span><span class="dep">Paddy priority endorsement</span><span class="dep">Platform API access</span><span class="dep">ClickHouse data pipeline</span></div>
+  <div class="sl">Q2 delivery target</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">P0</div><div class="kik">Feature complete</div></div>
+    <div class="ki"><div class="kiv">Beta</div><div class="kik">1 market live</div></div>
+    <div class="ki"><div class="kiv">API</div><div class="kik">Data connected</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P5: Data Dashboard -->
+<div id="s-p5" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">Marketing Data Dashboard</div>
+    <div class="ds">7-dimension KPI framework · BI dashboard build</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">Marketing data is fragmented across GA4, AppsFlyer, CRM, and ClickHouse with no unified definition. No single view of the full funnel from ad spend through to net funding. Reporting is manual, lagged, and inconsistent — making real-time performance decisions impossible for Paddy and regional managers.</div>
+  <div class="sl">KPI framework — 7 dimensions</div>
+  <div class="bgb" style="font-size:12px;line-height:2.1">
+    ① <strong>Investment & Scale</strong> — Total Spend · Spend Share · Budget Utilisation<br>
+    ② <strong>Traffic & Reach</strong> — Impressions · Reach · Clicks · CTR · Sessions · New Visitors<br>
+    ③ <strong>Acquisition & Conversion</strong> — Registered Users · FTD Users · FTD Conversion Rate · Time to FTD<br>
+    ④ <strong>Cost Efficiency</strong> — CPC · CPR · CPFTD · CPR/CPFTD Ratio<br>
+    ⑤ <strong>Funding Quality</strong> — Deposit · Withdrawal · Net Funding · Net Funding Margin<br>
+    ⑥ <strong>User Quality & Retention</strong> — MAU Deposit Users · Repeat Deposit Rate · Retention Rate · LTV<br>
+    ⑦ <strong>ROI & Executive Decisions</strong> — Marketing ROI · Contribution Margin · LTV/CPFTD
+  </div>
+  <div class="sl">KPI definition reference</div>
+  <a class="doc-link" href="#" onclick="alert('Internal file: zero_kpi_definitions.xlsx');return false">→ zero_kpi_definitions.xlsx (internal)</a>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">1</div><div><strong>Metric definition lock-in (April)</strong> — Confirm data source, refresh frequency, and join logic for each KPI with BI / IT; resolve attribution conflicts between GA4 and AppsFlyer</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">2</div><div><strong>Data pipeline alignment (April–May)</strong> — Connect GA4 + AppsFlyer + ClickHouse + Budget Tool; solve cross-platform attribution</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">3</div><div><strong>Dashboard v1 build (May)</strong> — Superset embedded in Portal; modules: full-funnel overview / regional comparison / campaign attribution / budget vs actual</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">4</div><div><strong>Review cycle setup (June)</strong> — Paddy: weekly ROI view / Regional managers: monthly / Content team: real-time funnel; write usage SOP</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">5</div><div><strong>Iteration (June+)</strong> — Add dimensions based on feedback; connect AI Ads Engine data stream</div></div>
+  </div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">7-layer</div><div class="kik">KPI framework</div></div>
+    <div class="ki"><div class="kiv">v1</div><div class="kik">Dashboard live</div></div>
+    <div class="ki"><div class="kiv">4 sources</div><div class="kik">Data connected</div></div>
+    <div class="ki"><div class="kiv">SOP</div><div class="kik">Review process</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P6: AI Content System -->
+<div id="s-p6" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">AI-Driven Content Production System</div>
+    <div class="ds">Scalable AI-assisted content workflow across all markets</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">The content team serves KR, LA, BR, and NZ markets, producing social posts, emails, website copy, and portal content. Production is entirely manual with no standardised AI tooling, no shared prompt library, and each market operating independently — resulting in inconsistent quality and output bottlenecks.</div>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">1</div><div><strong>Content type inventory (April)</strong> — List all output types; annotate: who creates it, frequency, biggest bottleneck</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">2</div><div><strong>AI tool selection (April)</strong> — Define tool stack; set usage permissions and cost budget</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">3</div><div><strong>Prompt library build (May)</strong> — Standard prompt templates by content type × market × channel; stored in Marketing Portal</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">4</div><div><strong>Workflow SOP (May)</strong> — "AI draft → human review → compliance check → publish"; written into Content Ops SOP hub</div></div>
+    <div class="step"><div class="sn" style="background:#E1F5EE;color:#085041;">5</div><div><strong>Team training (June)</strong> — AI tool onboarding for content members in each market; track adoption rate</div></div>
+  </div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">Prompt</div><div class="kik">Library built</div></div>
+    <div class="ki"><div class="kiv">4 markets</div><div class="kik">Tools integrated</div></div>
+    <div class="ki"><div class="kiv">SOP</div><div class="kik">Documented</div></div>
+    <div class="ki"><div class="kiv">–50%</div><div class="kik">Manual content time</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P7: Language -->
+<div id="s-p7" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">Language Standardisation</div>
+    <div class="ds">Website / Portal / Email — unified language and terminology</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">The website, Portal, and Email templates use inconsistent terminology across channels — the same product feature may be named differently in all three places, creating a fragmented user experience and elevating compliance risk. Q2 objective: establish the standard and governance framework. Q3: full execution and rollout.</div>
+  <div class="sl">Source document</div>
+  <a class="doc-link" href="https://ddmarketinghub-my.sharepoint.com/:w:/p/lingyang/IQDuGccLuTFlS7Bh_CQC-H0EAQ0IayTlfSlATORMtlYnEfE?e=eqvyvP&wdExp=TEAMS-TREATMENT&web=1" target="_blank">→ Language Standardisation Proposal v1 (SharePoint)</a>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#FAECE7;color:#712B13;">1</div><div><strong>Language audit (April)</strong> — Review all three channels for core terminology: account types, product names, action labels, regulatory statements, CTAs; log every inconsistency</div></div>
+    <div class="step"><div class="sn" style="background:#FAECE7;color:#712B13;">2</div><div><strong>Language Standard Guide (May)</strong> — Publish authoritative glossary: standard English + localised versions per market, with usage context and prohibited alternatives</div></div>
+    <div class="step"><div class="sn" style="background:#FAECE7;color:#712B13;">3</div><div><strong>Priority fixes (May–June)</strong> — Q2 scope: high-frequency, high-exposure issues only — homepage, registration flow, email templates; remainder to Q3 backlog</div></div>
+    <div class="step"><div class="sn" style="background:#FAECE7;color:#712B13;">4</div><div><strong>Cross-functional review mechanism (June)</strong> — Any change to user-visible text requires Content Lead (Nikki) sign-off; process agreed with product and IT</div></div>
+    <div class="step"><div class="sn" style="background:#FAECE7;color:#712B13;">5</div><div><strong>Q3 full execution</strong> — Portal internal copy, deep page content, multi-language alignment; batch updates via AI Content System</div></div>
+  </div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">Audit</div><div class="kik">3 channels complete</div></div>
+    <div class="ki"><div class="kiv">Guide</div><div class="kik">Glossary published</div></div>
+    <div class="ki"><div class="kiv">High-freq</div><div class="kik">Issues fixed</div></div>
+    <div class="ki"><div class="kiv">Process</div><div class="kik">Review mechanism</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P8: Instagram -->
+<div id="s-p8" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">Instagram International — 10K+</div>
+    <div class="ds">Zero Markets Global IG · English-first · Target: end of Q2</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">The Zero Markets international Instagram account has a low follower base, inconsistent posting cadence, and no unified visual identity or content strategy. The forex industry education and brand trust space on Instagram still has meaningful organic growth opportunity. Target: 10,000 followers by end of Q2, with a sustainable content operations SOP in place.</div>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#FBEAF0;color:#72243E;">1</div><div><strong>Account positioning & visual system (April)</strong> — 3 content pillars: Trading Education / Market Insights / Brand Culture; unified templates, colour palette, typography</div></div>
+    <div class="step"><div class="sn" style="background:#FBEAF0;color:#72243E;">2</div><div><strong>Content SOP build</strong> — 4–5 posts per week; at least 2 Reels (15–30s); standardised caption format, hashtag pool, CTA strategy</div></div>
+    <div class="step"><div class="sn" style="background:#FBEAF0;color:#72243E;">3</div><div><strong>Reels-first strategy</strong> — Leverage algorithm advantage; subtitles and strong opening hook required; content: market commentary, trading tips</div></div>
+    <div class="step"><div class="sn" style="background:#FBEAF0;color:#72243E;">4</div><div><strong>Growth tactics</strong> — Active engagement (comments, DMs); industry micro-KOL cross-promotion; bio link to targeted landing page</div></div>
+    <div class="step"><div class="sn" style="background:#FBEAF0;color:#72243E;">5</div><div><strong>Weekly data tracking</strong> — Followers, Reels views, reach, profile visits; identify top-performing content patterns</div></div>
+  </div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">10K+</div><div class="kik">Followers by June</div></div>
+    <div class="ki"><div class="kiv">4–5x</div><div class="kik">Posts per week</div></div>
+    <div class="ki"><div class="kiv">2x</div><div class="kik">Reels per week</div></div>
+    <div class="ki"><div class="kiv">SOP</div><div class="kik">Documented</div></div>
+  </div>
+</div>
+</div>
+
+<!-- P9: NISE Emails -->
+<div id="s-p9" style="display:none">
+<div class="det">
+  <div class="det-hdr">
+    <div class="dt">NISE Invest — Email Suite</div>
+    <div class="ds">40 transactional & lifecycle emails · 7 categories · In-house platform delivery</div>
+  </div>
+  <div class="sl">Background</div>
+  <div class="bgb">NISE Invest requires a complete transactional email suite covering the full client lifecycle — from account verification through to trading activity and fund movements. The scope covers 40 emails across 7 functional categories, mapped to the NISE-AU Security Template List. Emails are delivered through an in-house built platform. Compliance review has been completed.</div>
+  <div class="sl">Status</div>
+  <div class="tag-row">
+    <span class="tag" style="background:#EAF3DE;color:#27500A;border-color:#C0DD97;">Compliance review complete</span>
+    <span class="tag">In-house platform delivery</span>
+    <span class="tag">40 emails · 7 categories</span>
+  </div>
+  <div class="sl">7 email categories</div>
+  <div class="cat-grid">
+    <div class="cat-box"><div class="cat-name">Verification</div><div class="cat-desc">Identity & KYC confirmation flows</div></div>
+    <div class="cat-box"><div class="cat-name">Account Application</div><div class="cat-desc">Onboarding status & approval notifications</div></div>
+    <div class="cat-box"><div class="cat-name">Corporation Action</div><div class="cat-desc">Corporate event & entitlement notifications</div></div>
+    <div class="cat-box"><div class="cat-name">Trading</div><div class="cat-desc">Order confirmations & trade activity alerts</div></div>
+    <div class="cat-box"><div class="cat-name">Deposit & Withdrawal</div><div class="cat-desc">Fund movement confirmations & status updates</div></div>
+    <div class="cat-box"><div class="cat-name">Bank Sweep</div><div class="cat-desc">Cash management & sweep notifications</div></div>
+    <div class="cat-box"><div class="cat-name">Trusted Contact</div><div class="cat-desc">Trusted contact designation & update comms</div></div>
+  </div>
+  <div class="sl">Reference file</div>
+  <span class="doc-placeholder">→ NISE-AU Security Template List.xlsx — paste SharePoint link</span>
+  <div class="sl">How to execute</div>
+  <div class="steps">
+    <div class="step"><div class="sn" style="background:#B5D4F4;color:#042C53;">1</div><div><strong>Email scope & brief (April)</strong> — Map all 40 emails against 7 categories; confirm trigger logic and recipient rules per email type with the dev team</div></div>
+    <div class="step"><div class="sn" style="background:#B5D4F4;color:#042C53;">2</div><div><strong>Copywriting — Batch 1 (April–May)</strong> — Draft copy for highest-priority categories first: Verification + Account Application + Deposit & Withdrawal</div></div>
+    <div class="step"><div class="sn" style="background:#B5D4F4;color:#042C53;">3</div><div><strong>Copywriting — Batch 2 (May)</strong> — Draft remaining categories: Trading + Corporation Action + Bank Sweep + Trusted Contact</div></div>
+    <div class="step"><div class="sn" style="background:#B5D4F4;color:#042C53;">4</div><div><strong>Platform setup & QA (June)</strong> — Configure all 40 emails in the in-house platform; test trigger flows and rendering; final sign-off</div></div>
+    <div class="step"><div class="sn" style="background:#B5D4F4;color:#042C53;">5</div><div><strong>Go-live (June)</strong> — Full deployment; monitor delivery rates and trigger accuracy post-launch</div></div>
+  </div>
+  <div class="sl">Dependencies</div>
+  <div class="dep-row"><span class="dep">Dev team — trigger logic & platform access</span><span class="dep">Template list finalised</span></div>
+  <div class="sl">Q2 success metrics</div>
+  <div class="kpis">
+    <div class="ki"><div class="kiv">40</div><div class="kik">Emails written</div></div>
+    <div class="ki"><div class="kiv">7</div><div class="kik">Categories complete</div></div>
+    <div class="ki"><div class="kiv">Live</div><div class="kik">Platform deployed</div></div>
+    <div class="ki"><div class="kiv">QA</div><div class="kik">All flows tested</div></div>
+  </div>
+</div>
+</div>
+
+</div>
+<script>
+function show(id){
+  ['ov','p1','p2','p3','p4','p5','p6','p7','p8','p9'].forEach(t=>{
+    const el=document.getElementById('s-'+t);
+    if(el) el.style.display=t===id?'block':'none';
+  });
+  document.querySelectorAll('.tb').forEach((btn,i)=>{
+    const ids=['ov','p1','p2','p3','p4','p5','p6','p7','p8','p9'];
+    btn.classList.toggle('on',ids[i]===id);
+  });
+}
+</script>
