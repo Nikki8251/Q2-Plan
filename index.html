@@ -2,86 +2,112 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-.wrap{font-family:'Sora',sans-serif;background:#f7f6f3;color:#1a1917;padding:2rem 0 3rem}
-.hdr{margin-bottom:2rem}
-.hdr-eyebrow{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#a09d97;margin-bottom:.5rem}
-.hdr-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:#1a1917;letter-spacing:-.01em;line-height:1.2}
-.hdr-meta{display:flex;align-items:center;gap:.75rem;margin-top:.6rem;flex-wrap:wrap}
-.hdr-chip{font-size:11px;color:#7a7772;background:#eeece8;padding:3px 10px;border-radius:20px}
-.tabs{display:flex;gap:2px;margin-bottom:1.75rem;background:#eae8e4;border-radius:10px;padding:3px;overflow-x:auto}
+.wrap{font-family:'Sora',sans-serif;background:#f7f6f3;color:#1a1917;padding:2rem 1.5rem 3rem;max-width:960px;margin:0 auto}
+.hdr{margin-bottom:1.75rem}
+.hdr-eyebrow{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#a09d97;margin-bottom:.4rem}
+.hdr-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;color:#1a1917;letter-spacing:-.01em;line-height:1.2}
+.hdr-meta{display:flex;align-items:center;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}
+.hdr-chip{font-size:11px;color:#7a7772;background:#eeece8;padding:2px 9px;border-radius:20px}
+.tabs{display:flex;gap:2px;margin-bottom:1.5rem;background:#eae8e4;border-radius:10px;padding:3px;overflow-x:auto}
 .tabs::-webkit-scrollbar{display:none}
-.tb{padding:6px 13px;font-size:11px;font-weight:400;border-radius:7px;border:none;background:transparent;color:#8a8780;cursor:pointer;transition:all .18s;white-space:nowrap;font-family:'Sora',sans-serif;letter-spacing:.01em}
+.tb{padding:5px 11px;font-size:11px;font-weight:400;border-radius:7px;border:none;background:transparent;color:#8a8780;cursor:pointer;transition:all .18s;white-space:nowrap;font-family:'Sora',sans-serif}
 .tb:hover{color:#1a1917;background:#f0ede8}
 .tb.on{background:#fff;color:#1a1917;font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,.08),0 0 0 0.5px rgba(0,0,0,.06)}
-.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:2px;margin-bottom:1.5rem}
-.oc{background:#fff;padding:1.25rem 1rem 1.5rem;cursor:pointer;transition:all .18s;position:relative;border:0.5px solid #e8e5e0}
-.oc:hover{background:#faf9f7;z-index:1}
+
+/* Overview grid — tighter */
+.ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:1.25rem}
+.oc{background:#fff;padding:1rem;cursor:pointer;transition:all .18s;position:relative;border:0.5px solid #e8e5e0}
+.oc:hover{background:#faf9f7}
 .oc:hover .oc-arrow{color:#a09d97;transform:translateX(2px)}
-.on-num{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.6rem}
-.on-name{font-size:13px;font-weight:500;color:#2a2826;line-height:1.4}
-.oc-arrow{position:absolute;bottom:.875rem;right:.875rem;font-size:11px;color:#d8d5d0;transition:all .18s}
-.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:1.5rem}
-.stat-cell{background:#fff;padding:1.25rem 1rem;text-align:center;border:0.5px solid #e8e5e0}
-.stat-cell:first-child{border-radius:10px 0 0 10px}
-.stat-cell:last-child{border-radius:0 10px 10px 0}
-.stat-n{font-family:'Playfair Display',serif;font-size:26px;color:#1a1917;line-height:1}
-.stat-l{font-size:10px;color:#a09d97;margin-top:.4rem;font-weight:400;letter-spacing:.02em}
-.tl-wrap{background:#fff;border-radius:10px;border:0.5px solid #e8e5e0;padding:1.25rem}
-.tl-label{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c0bdb8;margin-bottom:1rem}
+.on-num{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.4rem}
+.on-name{font-size:12px;font-weight:500;color:#2a2826;line-height:1.4;padding-right:1rem}
+.oc-arrow{position:absolute;bottom:.75rem;right:.75rem;font-size:10px;color:#d8d5d0;transition:all .18s}
+
+/* Stats — compact row */
+.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:1.25rem}
+.stat-cell{background:#fff;padding:1rem;text-align:center;border:0.5px solid #e8e5e0}
+.stat-cell:first-child{border-radius:8px 0 0 8px}
+.stat-cell:last-child{border-radius:0 8px 8px 0}
+.stat-n{font-family:'Playfair Display',serif;font-size:22px;color:#1a1917;line-height:1}
+.stat-l{font-size:10px;color:#a09d97;margin-top:.3rem}
+
+/* Timeline */
+.tl-wrap{background:#fff;border-radius:10px;border:0.5px solid #e8e5e0;padding:1.125rem;margin-bottom:0}
+.tl-label{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.875rem}
 .tl-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eeece8;border-radius:7px;overflow:hidden}
-.tl-col{background:#fff;padding:1rem 1.125rem}
-.tl-month{font-size:12px;font-weight:600;color:#1a1917;margin-bottom:.75rem;letter-spacing:.02em}
-.tl-item{font-size:11px;color:#a09d97;margin-bottom:.35rem;padding-left:10px;position:relative;line-height:1.5}
-.tl-item::before{content:'';position:absolute;left:0;top:7px;width:3px;height:3px;border-radius:50%;background:#d8d5d0}
+.tl-col{background:#fff;padding:.875rem 1rem}
+.tl-month{font-size:11px;font-weight:600;color:#1a1917;margin-bottom:.6rem}
+.tl-item{font-size:11px;color:#a09d97;margin-bottom:.3rem;padding-left:9px;position:relative;line-height:1.45}
+.tl-item::before{content:'';position:absolute;left:0;top:6px;width:3px;height:3px;border-radius:50%;background:#d8d5d0}
+
+/* Detail */
 .det{background:#fff;border-radius:12px;border:0.5px solid #e8e5e0;overflow:hidden}
-.det-hero{padding:1.75rem 1.75rem 1.375rem;border-bottom:0.5px solid #eeece8;background:linear-gradient(135deg,#faf9f7 0%,#fff 100%)}
-.det-tag{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.5rem}
-.det-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:#1a1917;margin-bottom:.3rem;line-height:1.3}
+.det-hero{padding:1.5rem 1.5rem 1.125rem;border-bottom:0.5px solid #eeece8;background:linear-gradient(135deg,#faf9f7 0%,#fff 100%)}
+.det-tag{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.4rem}
+.det-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;color:#1a1917;margin-bottom:.25rem;line-height:1.3}
 .det-sub{font-size:12px;color:#a09d97;line-height:1.5}
-.det-body{padding:1.5rem 1.75rem}
-.sl{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.75rem;margin-top:1.5rem;display:flex;align-items:center;gap:.5rem}
+.det-body{padding:1.25rem 1.5rem}
+
+.sl{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.625rem;margin-top:1.25rem;display:flex;align-items:center;gap:.5rem}
 .sl:first-child{margin-top:0}
 .sl::after{content:'';flex:1;height:0.5px;background:#eeece8}
-.prose{font-size:13px;color:#6a6763;line-height:1.75;background:#faf9f7;border-radius:8px;padding:1rem 1.25rem;border:0.5px solid #eeece8}
+
+.prose{font-size:12.5px;color:#6a6763;line-height:1.75;background:#faf9f7;border-radius:8px;padding:.875rem 1.125rem;border:0.5px solid #eeece8}
+
+/* Pain points grid */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#eeece8;border-radius:8px;overflow:hidden}
+.pain-cell{background:#faf9f7;padding:.875rem 1rem}
+.pain-num{font-size:9px;font-weight:700;letter-spacing:.1em;color:#c0bdb8;margin-bottom:.35rem}
+.pain-title{font-size:12px;font-weight:500;color:#2a2826;margin-bottom:.25rem;line-height:1.4}
+.pain-desc{font-size:11px;color:#8a8780;line-height:1.55}
+
+/* OKR */
 .okr-grid{display:grid;grid-template-columns:3fr 2fr;gap:2px;background:#eeece8;border-radius:8px;overflow:hidden}
-.okr-cell{background:#faf9f7;padding:1.25rem}
-.okr-head{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.75rem}
-.okr-obj{font-size:13px;color:#2a2826;line-height:1.6;margin-bottom:1rem;font-weight:500}
-.okr-kr{font-size:12px;color:#8a8780;line-height:1.65;padding-left:20px;position:relative;margin-bottom:.45rem}
+.okr-cell{background:#faf9f7;padding:1.125rem}
+.okr-head{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#c0bdb8;margin-bottom:.625rem}
+.okr-obj{font-size:12.5px;color:#2a2826;line-height:1.6;margin-bottom:.875rem;font-weight:500}
+.okr-kr{font-size:11.5px;color:#8a8780;line-height:1.65;padding-left:20px;position:relative;margin-bottom:.4rem}
 .okr-kr::before{content:'KR';position:absolute;left:0;font-size:7px;font-weight:700;color:#d0cdc8;top:4px;letter-spacing:.06em}
-.okr-note{font-size:12px;color:#8a8780;line-height:1.7}
+.okr-note{font-size:11.5px;color:#8a8780;line-height:1.7}
+
+/* Steps */
 .steps{display:flex;flex-direction:column;gap:2px}
-.step{display:flex;align-items:flex-start;gap:1rem;padding:.875rem 1.125rem;background:#faf9f7;transition:background .15s;border:0.5px solid #eeece8;border-bottom:none}
+.step{display:flex;align-items:flex-start;gap:.875rem;padding:.75rem 1rem;background:#faf9f7;transition:background .15s;border:0.5px solid #eeece8;border-bottom:none}
 .step:first-child{border-radius:8px 8px 0 0}
 .step:last-child{border-radius:0 0 8px 8px;border-bottom:0.5px solid #eeece8}
 .step:hover{background:#f5f3ef}
-.step-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px;letter-spacing:.04em;border:1.5px solid}
-.step-text{font-size:12px;color:#6a6763;line-height:1.65}
+.step-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px;border:1.5px solid}
+.step-text{font-size:12px;color:#6a6763;line-height:1.6}
 .step-text strong{color:#2a2826;font-weight:500}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:2px;background:#eeece8;border-radius:8px;overflow:hidden}
-.kpi-cell{background:#faf9f7;padding:.875rem;text-align:center}
-.kpi-v{font-family:'Playfair Display',serif;font-size:18px;color:#1a1917}
-.kpi-l{font-size:10px;color:#b0ada8;margin-top:.3rem;font-weight:400}
+
+/* KPIs */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:2px;background:#eeece8;border-radius:8px;overflow:hidden}
+.kpi-cell{background:#faf9f7;padding:.75rem;text-align:center}
+.kpi-v{font-family:'Playfair Display',serif;font-size:17px;color:#1a1917}
+.kpi-l{font-size:10px;color:#b0ada8;margin-top:.25rem}
+
+/* Tags & links */
 .tag-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:.5rem}
-.tag{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0ede8;color:#7a7772;border:0.5px solid #e0ddd8}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;background:#f0ede8;color:#7a7772;border:0.5px solid #e0ddd8}
 .tag.green{background:#edf5ec;color:#4a7a50;border-color:#c8e0ca}
-.mod-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:.5rem}
-.mod{font-size:11px;padding:4px 10px;border-radius:5px;background:#f0ede8;color:#7a7772;border:0.5px solid #e0ddd8}
-.doc-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5a7fb5;text-decoration:none;padding:6px 12px;border:0.5px solid #c5d5ea;border-radius:6px;margin-top:.5rem;background:#f0f5fb;transition:all .18s;font-weight:500}
+.mod-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:.5rem}
+.mod{font-size:11px;padding:3px 9px;border-radius:5px;background:#f0ede8;color:#7a7772;border:0.5px solid #e0ddd8}
+.doc-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#5a7fb5;text-decoration:none;padding:5px 11px;border:0.5px solid #c5d5ea;border-radius:6px;margin-top:.5rem;background:#f0f5fb;transition:all .18s;font-weight:500}
 .doc-link:hover{background:#e5eef8;border-color:#aac0dc}
 .doc-link::before{content:'↗';font-size:10px}
-.dep-row{display:flex;gap:5px;flex-wrap:wrap}
-.dep{font-size:11px;padding:3px 10px;border-radius:5px;border:0.5px solid #e8e5e0;color:#a09d97;background:#faf9f7}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:2px;background:#eeece8;border-radius:8px;overflow:hidden}
-.cat-cell{background:#faf9f7;padding:.875rem}
-.cat-name{font-size:12px;font-weight:500;color:#2a2826;margin-bottom:.25rem}
+.link-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.dep-row{display:flex;gap:4px;flex-wrap:wrap}
+.dep{font-size:11px;padding:3px 9px;border-radius:5px;border:0.5px solid #e8e5e0;color:#a09d97;background:#faf9f7}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:2px;background:#eeece8;border-radius:8px;overflow:hidden}
+.cat-cell{background:#faf9f7;padding:.75rem}
+.cat-name{font-size:12px;font-weight:500;color:#2a2826;margin-bottom:.2rem}
 .cat-desc{font-size:11px;color:#b0ada8;line-height:1.4}
 </style>
 
 <div class="wrap">
 <div class="hdr">
-  <div class="hdr-eyebrow">Zero Markets · Content Team</div>
-  <div class="hdr-title">Q2 2026 — Full Project Plan</div>
+  <div class="hdr-eyebrow">Zero Markets · Q2 2026</div>
+  <div class="hdr-title">Full Project Plan</div>
   <div class="hdr-meta">
     <span class="hdr-chip">9 Projects</span>
     <span class="hdr-chip">Owner: Nikki</span>
@@ -120,7 +146,7 @@
     <div class="stat-cell"><div class="stat-n">7</div><div class="stat-l">Q2 delivery</div></div>
     <div class="stat-cell"><div class="stat-n">2</div><div class="stat-l">Q2→Q3 cross-quarter</div></div>
     <div class="stat-cell"><div class="stat-n">40</div><div class="stat-l">NISE emails scoped</div></div>
-    <div class="stat-cell"><div class="stat-n">7</div><div class="stat-l">Email categories</div></div>
+    <div class="stat-cell"><div class="stat-n">17</div><div class="stat-l">Systems managed</div></div>
   </div>
   <div class="tl-wrap">
     <div class="tl-label">Q2 month-by-month</div>
@@ -205,7 +231,7 @@
     <div class="kpi-row">
       <div class="kpi-cell"><div class="kpi-v">5+</div><div class="kpi-l">GEO-ready pages</div></div>
       <div class="kpi-cell"><div class="kpi-v">Live</div><div class="kpi-l">Schema deployed</div></div>
-      <div class="kpi-cell"><div class="kpi-v">3</div><div class="kpi-l">AI query citations</div></div>
+      <div class="kpi-cell"><div class="kpi-v">3</div><div class="kpi-l">AI citations</div></div>
       <div class="kpi-cell"><div class="kpi-v">Baseline</div><div class="kpi-l">Monitoring live</div></div>
     </div>
   </div>
@@ -243,34 +269,76 @@
 </div>
 </div>
 
-<!-- P3: Access Mgmt -->
+<!-- P3: Access Mgmt — FULLY UPDATED -->
 <div id="s-p3" style="display:none">
 <div class="det">
   <div class="det-hero">
     <div class="det-tag">P03 · Q2 Confirmed</div>
     <div class="det-title">Access Management System</div>
-    <div class="det-sub">Centralised SaaS permission management · Q1 design complete → Q2 launch</div>
+    <div class="det-sub">Centralised SaaS permission management across 17 systems · 4 structured workflows</div>
   </div>
   <div class="det-body">
-    <div class="sl">Background</div>
-    <div class="prose">SaaS tool permissions are currently unmanaged: no central access point, offboarded employees retain active accounts, and IT asset visibility across 70+ staff is near zero — creating both security risk and cost waste. System design was completed in Q1. Q2 goal: drive the system to full production and establish daily access management workflows.</div>
-    <div class="sl">Live system</div>
-    <a class="doc-link" href="https://nikki8251.github.io/Access-management/" target="_blank">Access Management System (Live)</a>
-    <div class="sl">How to execute</div>
-    <div class="steps">
-      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">1</div><div class="step-text"><strong>Stakeholder alignment (April)</strong> — Confirm rollout scope with IT, HR, and department managers; requires Paddy endorsement</div></div>
-      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">2</div><div class="step-text"><strong>Data initialisation</strong> — Audit all 70+ employee SaaS tool permissions; input into system to establish access baseline</div></div>
-      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">3</div><div class="step-text"><strong>System testing & deployment (May)</strong> — End-to-end testing of request flow, approval flow, and offboarding flow</div></div>
-      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">4</div><div class="step-text"><strong>Onboarding / offboarding SOP</strong> — Standardised permission workflows integrated with HR processes</div></div>
-      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">5</div><div class="step-text"><strong>Full rollout & training (June)</strong> — Train department managers; assign module owners</div></div>
+    <div class="sl">Why we're building this — 5 core problems</div>
+    <div class="pain-grid">
+      <div class="pain-cell">
+        <div class="pain-num">Problem 01</div>
+        <div class="pain-title">No formal access request process</div>
+        <div class="pain-desc">Access granted via chat messages with no approval chain, no records, and no audit trail.</div>
+      </div>
+      <div class="pain-cell">
+        <div class="pain-num">Problem 02</div>
+        <div class="pain-title">No unified entry point for personnel changes</div>
+        <div class="pain-desc">Title changes, team transfers, and promotions handled separately — same person has inconsistent identities across systems.</div>
+      </div>
+      <div class="pain-cell">
+        <div class="pain-num">Problem 03</div>
+        <div class="pain-title">SaaS costs out of control</div>
+        <div class="pain-desc">Adobe CC and Similarweb per-seat licences continue billing after employees leave or change roles.</div>
+      </div>
+      <div class="pain-cell">
+        <div class="pain-num">Problem 04</div>
+        <div class="pain-title">Team Leaders have no visibility</div>
+        <div class="pain-desc">Managers don't know which systems their team members have access to — can't verify appropriateness or take audit responsibility.</div>
+      </div>
+      <div class="pain-cell" style="grid-column:1/-1">
+        <div class="pain-num">Problem 05</div>
+        <div class="pain-title">Offboarding relies on memory across 17 systems</div>
+        <div class="pain-desc">When employees leave, IT and HR mentally recall which systems to revoke — across Jira, Monday.com, Meta Ads, Instagram, Confluence, CRM, Funding Admin, IB Portal, Marketing Portal, Risk Portal, Admin Portal, Superset, Adobe CC, Similarweb, HubSpot, Message Template, and Meta Ads Manager. Entirely unsustainable.</div>
+      </div>
     </div>
+
+    <div class="sl">System links</div>
+    <div class="link-row">
+      <a class="doc-link" href="https://nikki8251.github.io/Access-management/" target="_blank">Access Management System (Live)</a>
+      <a class="doc-link" href="https://nikki8251.github.io/Access-Management-Process-Flows/" target="_blank">Process Flow Design (Live)</a>
+    </div>
+
+    <div class="sl">4 workflows designed</div>
+    <div class="steps">
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">1</div><div class="step-text"><strong>Access Request</strong> — Employee submits → Team Leader approves in-system → IT executes → full audit log auto-generated. Solves Problem 01.</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">2</div><div class="step-text"><strong>Offboarding</strong> — HR triggers → system auto-generates full permission checklist → IT revokes per item → completion certificate issued. 8 internal systems via API, 9 external manually confirmed. Solves Problems 03 + 05.</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">3</div><div class="step-text"><strong>Personnel Change</strong> — Manager submits → HR as single source of truth → IT syncs all 17 systems → role-linked permissions auto-triggered. Solves Problem 02.</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">4</div><div class="step-text"><strong>Quarterly Access Review</strong> — IT initiates each quarter → Team Leaders review and flag anomalies → IT processes flags → audit report generated. Solves Problem 04.</div></div>
+    </div>
+
+    <div class="sl">How to execute in Q2</div>
+    <div class="steps">
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">1</div><div class="step-text"><strong>Stakeholder alignment (April)</strong> — Confirm rollout scope with IT, HR, and department managers; requires Paddy endorsement to drive cross-team cooperation</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">2</div><div class="step-text"><strong>Data initialisation</strong> — Audit all 70+ employees' current SaaS permissions across 17 systems; input into system to establish access baseline</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">3</div><div class="step-text"><strong>System testing & deployment (May)</strong> — End-to-end testing of all 4 workflows: request flow, approval flow, offboarding flow, quarterly review</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">4</div><div class="step-text"><strong>Onboarding / offboarding SOP</strong> — Standardised permission workflows integrated with HR processes; documented and signed off</div></div>
+      <div class="step"><div class="step-num" style="border-color:#f0ddb5;color:#8a6020;background:#fdf5e5">5</div><div class="step-text"><strong>Full rollout & training (June)</strong> — Train department managers and Team Leaders on system usage; assign module owners per workflow</div></div>
+    </div>
+
     <div class="sl">Dependencies</div>
     <div class="dep-row"><span class="dep">Paddy endorsement</span><span class="dep">IT cooperation</span><span class="dep">HR process integration</span><span class="dep">Department data input</span></div>
+
     <div class="sl">Q2 success metrics</div>
     <div class="kpi-row">
       <div class="kpi-cell"><div class="kpi-v">Live</div><div class="kpi-l">System launched</div></div>
       <div class="kpi-cell"><div class="kpi-v">70+</div><div class="kpi-l">Users mapped</div></div>
-      <div class="kpi-cell"><div class="kpi-v">SOP</div><div class="kpi-l">On/offboarding</div></div>
+      <div class="kpi-cell"><div class="kpi-v">17</div><div class="kpi-l">Systems covered</div></div>
+      <div class="kpi-cell"><div class="kpi-v">4</div><div class="kpi-l">Workflows live</div></div>
       <div class="kpi-cell"><div class="kpi-v">0</div><div class="kpi-l">Ghost accounts</div></div>
     </div>
   </div>
@@ -364,21 +432,21 @@
   </div>
   <div class="det-body">
     <div class="sl">Background</div>
-    <div class="prose">The content team serves KR, LA, BR, and NZ markets, producing social posts, emails, website copy, and portal content. Production is entirely manual with no standardised AI tooling, no shared prompt library, and each market operating independently — resulting in inconsistent quality and output bottlenecks.</div>
+    <div class="prose">The team serves KR, LA, BR, and NZ markets, producing social posts, emails, website copy, and portal content. Production is entirely manual with no standardised AI tooling, no shared prompt library, and each market operating independently — resulting in inconsistent quality and output bottlenecks.</div>
     <div class="sl">How to execute</div>
     <div class="steps">
       <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">1</div><div class="step-text"><strong>Content type inventory (April)</strong> — List all output types; annotate: who creates it, frequency, biggest bottleneck</div></div>
       <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">2</div><div class="step-text"><strong>AI tool selection (April)</strong> — Define tool stack; set usage permissions and cost budget</div></div>
       <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">3</div><div class="step-text"><strong>Prompt library build (May)</strong> — Standard prompt templates by content type × market × channel; stored in Marketing Portal</div></div>
-      <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">4</div><div class="step-text"><strong>Workflow SOP (May)</strong> — "AI draft → human review → compliance check → publish"; written into Content Ops SOP hub</div></div>
-      <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">5</div><div class="step-text"><strong>Team training (June)</strong> — AI tool onboarding for content members in each market; track adoption rate</div></div>
+      <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">4</div><div class="step-text"><strong>Workflow SOP (May)</strong> — "AI draft → human review → compliance check → publish"; written into Ops SOP hub</div></div>
+      <div class="step"><div class="step-num" style="border-color:#c5d5ea;color:#5a7fb5;background:#f0f5fb">5</div><div class="step-text"><strong>Team training (June)</strong> — AI tool onboarding for members in each market; track adoption rate</div></div>
     </div>
     <div class="sl">Q2 success metrics</div>
     <div class="kpi-row">
       <div class="kpi-cell"><div class="kpi-v">Prompt</div><div class="kpi-l">Library built</div></div>
       <div class="kpi-cell"><div class="kpi-v">4</div><div class="kpi-l">Markets integrated</div></div>
       <div class="kpi-cell"><div class="kpi-v">SOP</div><div class="kpi-l">Documented</div></div>
-      <div class="kpi-cell"><div class="kpi-v">–50%</div><div class="kpi-l">Manual content time</div></div>
+      <div class="kpi-cell"><div class="kpi-v">–50%</div><div class="kpi-l">Manual time</div></div>
     </div>
   </div>
 </div>
